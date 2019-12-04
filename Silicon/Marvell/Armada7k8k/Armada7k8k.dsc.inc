@@ -397,7 +397,6 @@
 
   # PCIE
   gArmTokenSpaceGuid.PcdPciIoTranslation|0xEFF00000
-  gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress|0xE0000000
 
   # SoC Configuration Space
   gMarvellTokenSpaceGuid.PcdConfigSpaceBaseAddress|0xE0000000

@@ -9,12 +9,19 @@
 
 **/
 
+#include <Uefi.h>
 #include <Base.h>
 
 #include <Library/BaseLib.h>
 #include <Library/DebugLib.h>
 #include <Library/IoLib.h>
+#include <Library/MemoryAllocationLib.h>
 #include <Library/PciSegmentLib.h>
+#include <Library/UefiBootServicesTableLib.h>
+
+#include <Protocol/BoardDesc.h>
+
+UINT64 *ConfigBaseAddrs;
 
 typedef enum {
   PciCfgWidthUint8      = 0,
@@ -22,6 +29,53 @@ typedef enum {
   PciCfgWidthUint32,
   PciCfgWidthMax
 } PCI_CFG_WIDTH;
+
+/**
+  Obtain addresses of PCIe configuration registers
+
+  @param [in]  ImageHandle  The image handle.
+  @param [in] *SystemTable  The system table.
+
+  @retval EFI_SUCEESS       PCIE configuration successful.
+  @retval Other             Return error status.
+
+**/
+EFI_STATUS
+EFIAPI
+Armada7k8kPciSegmentLibConstructor (
+  VOID
+  )
+{
+  CONST MV_BOARD_PCIE_DESCRIPTION *PcieDesc;
+  MARVELL_BOARD_DESC_PROTOCOL *Proto;
+  EFI_STATUS Status;
+  UINTN Index;
+
+  Status = gBS->LocateProtocol (
+                  &gMarvellBoardDescProtocolGuid,
+                  NULL,
+                  (VOID **)&Proto
+                  );
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  Status = Proto->PcieDescriptionGet (Proto, &PcieDesc);
+  if (EFI_ERROR (Status)) {
+    return Status;
+  }
+
+  ConfigBaseAddrs = AllocateZeroPool (PcieDesc->PcieControllerCount * sizeof (UINT64));
+  if (ConfigBaseAddrs == NULL) {
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  for (Index = 0; Index < PcieDesc->PcieControllerCount; ++Index) {
+    ConfigBaseAddrs[Index] = PcieDesc->PcieControllers[Index].ConfigSpaceAddress;
+  }
+
+  return EFI_SUCCESS;
+}
 
 /**
   Assert the validity of a PCI Segment address.
@@ -33,6 +87,15 @@ typedef enum {
 **/
 #define ASSERT_INVALID_PCI_SEGMENT_ADDRESS(A,M) \
   ASSERT (((A) & (0xffff0000f0000000ULL | (M))) == 0)
+
+/**
+  Extract segment number from PCI Segment address
+
+  @param  A The address to process.
+
+**/
+#define SEGMENT_NUMBER(A) \
+  (((A) & 0x0000ffff00000000) >> 32)
 
 /**
   Internal worker function to obtain config space base address.
@@ -49,7 +112,7 @@ PciSegmentLibGetConfigBase (
   IN  UINT64      Address
   )
 {
-  return PcdGet64 (PcdPciExpressBaseAddress);
+  return ConfigBaseAddrs[SEGMENT_NUMBER (Address)];
 }
 
 /**
