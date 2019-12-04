@@ -81,12 +81,16 @@ ArmPlatformGetVirtualMemoryMap (
   UINT64                        MemHighStart;
   UINT64                        MemHighSize;
   UINT64                        ConfigSpaceBaseAddr;
+  UINT64                        ExtraConfigSpaceBaseAddr;
+  UINT64                        ExtraConfigSpaceSize;
   EFI_RESOURCE_ATTRIBUTE_TYPE   ResourceAttributes;
   EFI_STATUS                    Status;
 
   ASSERT (VirtualMemoryMap != NULL);
 
   ConfigSpaceBaseAddr = FixedPcdGet64 (PcdConfigSpaceBaseAddress);
+  ExtraConfigSpaceBaseAddr = FixedPcdGet64 (PcdExtraConfigSpaceBaseAddress);
+  ExtraConfigSpaceSize = FixedPcdGet64 (PcdExtraConfigSpaceSize);
 
   // Obtain total memory size from the hardware.
   Status = GetDramSize (&MemSize);
@@ -130,6 +134,14 @@ ArmPlatformGetVirtualMemoryMap (
   mVirtualMemoryTable[Index].VirtualBase     = ConfigSpaceBaseAddr;
   mVirtualMemoryTable[Index].Length          = SIZE_4GB - ConfigSpaceBaseAddr;
   mVirtualMemoryTable[Index].Attributes      = ARM_MEMORY_REGION_ATTRIBUTE_DEVICE;
+
+  // Extra configuration space
+  if (ExtraConfigSpaceBaseAddr && ExtraConfigSpaceSize) {
+    mVirtualMemoryTable[++Index].PhysicalBase = ExtraConfigSpaceBaseAddr;
+    mVirtualMemoryTable[Index].VirtualBase    = ExtraConfigSpaceBaseAddr;
+    mVirtualMemoryTable[Index].Length         = ExtraConfigSpaceSize;
+    mVirtualMemoryTable[Index].Attributes     = ARM_MEMORY_REGION_ATTRIBUTE_DEVICE;
+  }
 
   if (MemSize > MemLowSize) {
     //

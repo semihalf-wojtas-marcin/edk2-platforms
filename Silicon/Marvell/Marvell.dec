@@ -183,6 +183,8 @@
 
 #Configuration space
   gMarvellTokenSpaceGuid.PcdConfigSpaceBaseAddress|0xF0000000|UINT64|0x50000054
+  gMarvellTokenSpaceGuid.PcdExtraConfigSpaceBaseAddress|0x0|UINT64|0x50010054
+  gMarvellTokenSpaceGuid.PcdExtraConfigSpaceSize|0x0|UINT64|0x50010055
 
   #
   # The secure firmware may occupy a DRAM region that is accessible by the

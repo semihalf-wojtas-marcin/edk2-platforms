@@ -401,6 +401,8 @@
 
   # SoC Configuration Space
   gMarvellTokenSpaceGuid.PcdConfigSpaceBaseAddress|0xE0000000
+  gMarvellTokenSpaceGuid.PcdExtraConfigSpaceBaseAddress|0x900000000
+  gMarvellTokenSpaceGuid.PcdExtraConfigSpaceSize|0x50000000
 
 !if $(CAPSULE_ENABLE)
 [PcdsDynamicExDefault.common.DEFAULT]

@@ -45,6 +45,8 @@
   gArmTokenSpaceGuid.PcdArmPrimaryCore
 
   gMarvellTokenSpaceGuid.PcdConfigSpaceBaseAddress
+  gMarvellTokenSpaceGuid.PcdExtraConfigSpaceBaseAddress
+  gMarvellTokenSpaceGuid.PcdExtraConfigSpaceSize
 
 [Ppis]
   gArmMpCoreInfoPpiGuid
