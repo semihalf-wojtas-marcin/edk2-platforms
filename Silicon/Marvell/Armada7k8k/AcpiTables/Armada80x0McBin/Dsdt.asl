@@ -580,7 +580,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "MVEBU ", "ARMADA8K", 3)
                     QWordMemory (ResourceProducer, PosDecode, MinFixed, MaxFixed, NonCacheable, ReadWrite,
                         0x0000000000000000,                 // Granularity
                         PCI_MMIO64_BASE,                    // Range Minimum
-                        0x8FFFFFFFF,                        // Range Maximum
+                        0x9FFFFFFFF,                        // Range Maximum
                         0x00000000,                         // Translation Offset
                         PCI_MMIO64_SIZE                     // Length
                         )

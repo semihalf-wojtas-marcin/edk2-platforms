@@ -69,7 +69,7 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinSize     = 0x20000000,
     .PcieMmio64Translation = 0,
     .PcieMmio64WinBase     = 0x800000000,
-    .PcieMmio64WinSize     = 0x100000000,
+    .PcieMmio64WinSize     = 0x200000000,
   }
 };
 
