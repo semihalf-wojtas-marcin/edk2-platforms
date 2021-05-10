@@ -21,6 +21,7 @@
   Cn9131DbA/Ssdt.asl
   Cn913xDbA/Dsdt.asl
   Cn913xDbA/Mcfg.aslc
+  Dbg2.aslc
   Fadt.aslc
   Gtdt.aslc
   Madt.aslc
