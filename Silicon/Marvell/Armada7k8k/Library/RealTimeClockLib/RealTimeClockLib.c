@@ -141,20 +141,7 @@ LibGetWakeupTime (
   OUT EFI_TIME    *Time
   )
 {
-  UINT32 WakeupSeconds;
-
-  *Enabled = MmioRead32 (mArmadaRtcBase + RTC_IRQ_2_CONFIG_REG) & RTC_IRQ_ALARM_EN;
-
-  *Pending = MmioRead32 (mArmadaRtcBase + RTC_IRQ_STATUS_REG) & RTC_IRQ_ALARM_MASK;
-  // Ack pending alarm
-  if (Pending) {
-    MmioWrite32 (mArmadaRtcBase + RTC_IRQ_STATUS_REG, RTC_IRQ_ALARM_MASK);
-  }
-
-  WakeupSeconds = MmioRead32 (mArmadaRtcBase + RTC_ALARM_2_REG);
-  EpochToEfiTime (WakeupSeconds, Time);
-
-  return EFI_SUCCESS;
+  return EFI_UNSUPPORTED;
 }
 
 /**
@@ -177,34 +164,7 @@ LibSetWakeupTime (
   OUT EFI_TIME    *Time
   )
 {
-  UINTN       WakeupSeconds;
-
-  //
-  // Because the Armada RTC uses a 32-bit counter for seconds,
-  // the maximum time span is just over 136 years.
-  // Time is stored in Unix Epoch format, so it starts in 1970,
-  // Therefore it can not exceed the year 2106.
-  //
-  if ((Time->Year < 1970) || (Time->Year >= 2106)) {
-    return EFI_UNSUPPORTED;
-  }
-
-  // Convert time to raw seconds
-  WakeupSeconds = EfiTimeToEpoch (Time);
-  if (WakeupSeconds > MAX_UINT32) {
-    return EFI_INVALID_PARAMETER;
-  }
-
-  // Issue delayed write to alarm register
-  RtcDelayedWrite (RTC_ALARM_2_REG, (UINT32)WakeupSeconds);
-
-  if (Enabled) {
-    MmioWrite32 (mArmadaRtcBase + RTC_IRQ_2_CONFIG_REG, RTC_IRQ_ALARM_EN);
-  } else {
-    MmioWrite32 (mArmadaRtcBase + RTC_IRQ_2_CONFIG_REG, 0);
-  }
-
-  return EFI_SUCCESS;
+  return EFI_UNSUPPORTED;
 }
 
 /**

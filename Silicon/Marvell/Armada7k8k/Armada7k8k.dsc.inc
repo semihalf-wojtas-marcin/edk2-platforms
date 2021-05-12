@@ -195,9 +195,7 @@
 !else
   CapsuleLib|MdeModulePkg/Library/DxeCapsuleLibNull/DxeCapsuleLibNull.inf
 !endif
-!if $(TARGET) != RELEASE
   DebugLib|MdePkg/Library/DxeRuntimeDebugLibSerialPort/DxeRuntimeDebugLibSerialPort.inf
-!endif
   VariablePolicyLib|MdeModulePkg/Library/VariablePolicyLib/VariablePolicyLibRuntimeDxe.inf
 
 [LibraryClasses.ARM, LibraryClasses.AARCH64]
@@ -618,6 +616,7 @@
     <PcdsFixedAtBuild>
       # support ACPI v5.0 or later
       gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiExposedTableVersions|0x20
+      gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId|"_MRVL_"
   }
 
 [BuildOptions.common.EDKII.DXE_CORE,BuildOptions.common.EDKII.DXE_DRIVER,BuildOptions.common.EDKII.UEFI_DRIVER,BuildOptions.common.EDKII.UEFI_APPLICATION]

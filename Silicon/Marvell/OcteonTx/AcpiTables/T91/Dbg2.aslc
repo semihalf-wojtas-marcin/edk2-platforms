@@ -10,13 +10,26 @@
 **/
 #include <IndustryStandard/Acpi.h>
 #include <IndustryStandard/DebugPort2Table.h>
-#include <IndustryStandard/SbsaQemuAcpi.h>
 #include <Library/AcpiLib.h>
 #include <Library/PcdLib.h>
 
+#include "AcpiHeader.h"
+
 #pragma pack(1)
 
-#define CN913X_UART_STR { '\\', '_', 'S', 'B', '.', 'C', 'O', 'M', '0', 0x00 }
+#define CN913X_UART_STR { '\\', '_', 'S', 'B', '.', 'C', 'O', 'M', '1', 0x00 }
+
+#define MARVELL_ACPI_HEADER(Signature, Type, Revision) {                       \
+    Signature,                                   /* UINT32  Signature */       \
+    sizeof (Type),                               /* UINT32  Length */          \
+    Revision,                                    /* UINT8   Revision */        \
+    0,                                           /* UINT8   Checksum */        \
+    { '_', 'M', 'R', 'V', 'L', '_' },            /* UINT8   OemId[6] */        \
+    FixedPcdGet64 (PcdAcpiDefaultOemTableId),    /* UINT64  OemTableId */      \
+    FixedPcdGet32 (PcdAcpiDefaultOemRevision),   /* UINT32  OemRevision */     \
+    FixedPcdGet32 (PcdAcpiDefaultCreatorId),     /* UINT32  CreatorId */       \
+    FixedPcdGet32 (PcdAcpiDefaultCreatorRevision)/* UINT32  CreatorRevision */ \
+  }
 
 typedef struct {
   EFI_ACPI_DBG2_DEBUG_DEVICE_INFORMATION_STRUCT Dbg2Device;
@@ -33,7 +46,7 @@ typedef struct {
 
 STATIC DBG2_TABLE Dbg2 = {
   {
-    MARVELL_ACPI_DBG2_HEADER (
+    MARVELL_ACPI_HEADER (
       EFI_ACPI_6_3_DEBUG_PORT_2_TABLE_SIGNATURE,
       DBG2_TABLE,
       EFI_ACPI_DBG2_DEBUG_DEVICE_INFORMATION_STRUCT_REVISION
