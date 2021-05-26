@@ -10,11 +10,15 @@
 **/
 
 #include <Base.h>
+#include <PiDxe.h>
 
 #include <Library/BaseLib.h>
 #include <Library/DebugLib.h>
+#include <Library/DxeServicesTableLib.h>
 #include <Library/IoLib.h>
 #include <Library/PciSegmentLib.h>
+
+EFI_HANDLE mImageHandle;
 
 typedef enum {
   PciCfgWidthUint8      = 0,
@@ -1387,4 +1391,55 @@ PciSegmentWriteBuffer (
   }
 
   return ReturnValue;
+}
+
+/**
+￼  Initialize Pci Segment Library
+￼
+￼  @retval EFI_SUCCESS       PCIE configuration successful.
+￼  @retval Other             Return error status.
+￼
+￼**/
+EFI_STATUS
+EFIAPI
+Armada7k8kPciSegmentLibConstructor (
+  VOID
+  )
+{
+  UINT64 ConfigBaseAddr;
+  EFI_STATUS Status;
+
+  ConfigBaseAddr = PcdGet64 (PcdPciExpressBaseAddress);
+
+  //
+  // Add PCIE base into Runtime memory so that it can be reported in E820 table
+  //
+  Status = gDS->AddMemorySpace (
+                  EfiGcdMemoryTypeMemoryMappedIo,
+                  ConfigBaseAddr,
+                  SIZE_256MB,
+                  EFI_MEMORY_UC
+                  );
+  ASSERT_EFI_ERROR(Status);
+
+  Status = gDS->AllocateMemorySpace (
+                  EfiGcdAllocateAddress,
+                  EfiGcdMemoryTypeMemoryMappedIo,
+                  0,
+                  SIZE_256MB,
+                  &ConfigBaseAddr,
+                  mImageHandle,
+                  NULL
+                  );
+  ASSERT_EFI_ERROR(Status);
+
+  Status = gDS->SetMemorySpaceAttributes (
+                  ConfigBaseAddr,
+                  SIZE_256MB,
+                  EFI_MEMORY_UC
+                  );
+  ASSERT_EFI_ERROR (Status);
+
+
+  return Status;
 }

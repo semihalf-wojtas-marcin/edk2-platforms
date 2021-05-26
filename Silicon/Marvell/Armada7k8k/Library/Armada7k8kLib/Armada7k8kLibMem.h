@@ -5,6 +5,9 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 *******************************************************************************/
 
+#define ARMADA7K8K_MMIO_REG_OFFS        0xf0000000
+#define ARMADA7K8K_MMIO_REG_SIZE        SIZE_256MB
+
 #define CCU_MC_RCR_REG                  0xf0001700
 #define REMAP_EN_MASK                   0x1
 #define REMAP_SIZE_OFFS                 20

@@ -128,7 +128,13 @@ ArmPlatformGetVirtualMemoryMap (
   // Configuration space
   mVirtualMemoryTable[++Index].PhysicalBase  = ConfigSpaceBaseAddr;
   mVirtualMemoryTable[Index].VirtualBase     = ConfigSpaceBaseAddr;
-  mVirtualMemoryTable[Index].Length          = SIZE_4GB - ConfigSpaceBaseAddr;
+  mVirtualMemoryTable[Index].Length          = SIZE_256MB;
+  mVirtualMemoryTable[Index].Attributes      = ARM_MEMORY_REGION_ATTRIBUTE_DEVICE;
+
+  // MMIO registers space
+  mVirtualMemoryTable[++Index].PhysicalBase  = ARMADA7K8K_MMIO_REG_OFFS;
+  mVirtualMemoryTable[Index].VirtualBase     = ARMADA7K8K_MMIO_REG_OFFS;
+  mVirtualMemoryTable[Index].Length          = ARMADA7K8K_MMIO_REG_SIZE;
   mVirtualMemoryTable[Index].Attributes      = ARM_MEMORY_REGION_ATTRIBUTE_DEVICE;
 
   if (MemSize > MemLowSize) {
