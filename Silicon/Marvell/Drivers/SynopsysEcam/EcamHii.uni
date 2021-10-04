@@ -1,0 +1,19 @@
+/*
+ * Here be license.
+*/
+
+#langdef en-US  "English"
+
+#string STR_FORM_SET_TITLE    #language en-US "Synopsys PCIE ECAM workaround in ACPI"
+#string STR_FORM_SET_TITLE_HELP   #language en-US "Press <Enter> to choose whether PCIE ECAM workaround should be enabled"
+
+#string STR_MAIN_FORM_TITLE   #language en-US "Synopsys PCIE ECAM workaround in ACPI"
+#string STR_NULL_STRING     #language en-US ""
+
+#string STR_WA_SELECT_PROMPT    #language en-US "PCIE ECAM workaround preference"
+#string STR_WA_SELECT_HELP    #language en-US "Select PCIE ECAM workaround preference"
+
+#string STR_WA_SELECT_ENABLE    #language en-US "Enabled"
+#string STR_WA_SELECT_DISABLE   #language en-US "Disabled"
+
+

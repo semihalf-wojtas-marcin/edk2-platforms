@@ -403,6 +403,13 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize|0x00010000
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize|0x00010000
 
+  #
+  # Select Ecam pereference defaults
+  #
+!if $(ARCH) == AARCH64
+  gMarvellTokenSpaceGuid.PcdDefaultEcamPref|0x1
+!endif
+
 !if $(CAPSULE_ENABLE)
 [PcdsDynamicExDefault.common.DEFAULT]
   gEfiSignedCapsulePkgTokenSpaceGuid.PcdEdkiiSystemFirmwareImageDescriptor|{0x0}|VOID*|0x100
@@ -508,6 +515,12 @@
   Silicon/Marvell/Drivers/SdMmc/XenonDxe/XenonDxe.inf
 
   # PCI
+  Silicon/Marvell/Drivers/SynopsysEcam/EcamDxe.inf {
+    <LibraryClasses>
+      AcpiHelperLib|DynamicTablesPkg/Library/Common/AcpiHelperLib/AcpiHelperLib.inf
+      AmlLib|DynamicTablesPkg/Library/Common/AmlLib/AmlLib.inf
+      BasePrintLib|MdePkg/Library/BasePrintLib/BasePrintLib.inf
+  }
   ArmPkg/Drivers/ArmPciCpuIo2Dxe/ArmPciCpuIo2Dxe.inf
   MdeModulePkg/Bus/Pci/PciHostBridgeDxe/PciHostBridgeDxe.inf
   MdeModulePkg/Bus/Pci/PciBusDxe/PciBusDxe.inf

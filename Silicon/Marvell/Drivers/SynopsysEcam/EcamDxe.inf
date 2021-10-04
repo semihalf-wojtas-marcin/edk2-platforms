@@ -1,0 +1,48 @@
+/*
+ * Here be license
+ */
+
+[Defines]
+  INF_VERSION     = 0x00010019
+  BASE_NAME       = EcamPlatformDxe
+  FILE_GUID       = 492E75F6-7708-4378-92B6-34336388E8EA
+  MODULE_TYPE     = DXE_DRIVER
+  VERSION_STRING  = 1.0
+  ENTRY_POINT     = EcamEntryPoint
+
+[Sources]
+  EcamDxe.c
+  EcamHii.uni
+  EcamHii.vfr
+
+[Packages]
+  EmbeddedPkg/EmbeddedPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  Silicon/Marvell/Marvell.dec
+  DynamicTablesPkg/DynamicTablesPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  HiiLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  UefiRuntimeServicesTableLib
+  ArmadaBoardDescLib
+  BasePrintLib
+  AcpiHelperLib
+  AmlLib
+
+[Guids]
+  gEcamPlatformFormSetGuid
+  gEfiAcpiTableGuid
+
+[Depex]
+  gEfiVariableArchProtocolGuid        AND
+  gEfiVariableWriteArchProtocolGuid
+
+[Pcd]
+  gMarvellTokenSpaceGuid.PcdDefaultEcamPref
+
