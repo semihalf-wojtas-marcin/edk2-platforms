@@ -14,4 +14,5 @@
   # ACPI support
 !if $(ARCH) == AARCH64
   INF RuleOverride = ACPITABLE Silicon/Marvell/OcteonTx/AcpiTables/T91/$(PLATFORM_NAME).inf
+  INF Drivers/AMD/GOP/AMDGOP.inf
 !endif

@@ -16,4 +16,5 @@
 
 !if $(ARCH) == AARCH64
   INF RuleOverride = ACPITABLE Silicon/Marvell/Armada7k8k/AcpiTables/Armada80x0McBin.inf
+  INF Drivers/AMD/GOP/AMDGOP.inf
 !endif
