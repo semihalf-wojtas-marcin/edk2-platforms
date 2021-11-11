@@ -17,11 +17,11 @@
 
 #define MCI0_TARGET_ID                  0x0
 #define MCI1_TARGET_ID                  0x1
-#define CP1_PCIE_WIN64_BASE             0x890000000
-#define CP1_PCIE_WIN64_SIZE             0x30000000
+#define CP1_PCIE_WIN64_BASE             0xA20000000
+#define CP1_PCIE_WIN64_SIZE             0x60000000
 #define CP1_PCIE_WIN64_ID               0x5
-#define CP2_PCIE_WIN64_BASE             0x8c0000000
-#define CP2_PCIE_WIN64_SIZE             0x30000000
+#define CP2_PCIE_WIN64_BASE             0xA80000000
+#define CP2_PCIE_WIN64_SIZE             0x60000000
 #define CP2_PCIE_WIN64_ID               0x6
 
 #define CP0_GPIO1_DATA_OUT_REG          0xF2440140

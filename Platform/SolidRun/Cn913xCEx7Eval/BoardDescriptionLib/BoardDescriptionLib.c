@@ -121,7 +121,7 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinSize     = 0x20000000,
     .PcieMmio64Translation = 0,
     .PcieMmio64WinBase     = 0x810000000,
-    .PcieMmio64WinSize     = 0x80000000,
+    .PcieMmio64WinSize     = 0x210000000,
   },
   { /* CP1 PCIE0 @0xF4600000 */
     .PcieDbiAddress        = 0xF4600000,
@@ -137,8 +137,8 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinBase     = 0xE3000000,
     .PcieMmio32WinSize     = 0x1000000,
     .PcieMmio64Translation = 0,
-    .PcieMmio64WinBase     = 0x890000000,
-    .PcieMmio64WinSize     = 0x10000000,
+    .PcieMmio64WinBase     = 0xA20000000,
+    .PcieMmio64WinSize     = 0x20000000,
   },
   { /* CP1 PCIE1 @0xF4620000 */
     .PcieDbiAddress        = 0xF4620000,
@@ -154,8 +154,8 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinBase     = 0xE5000000,
     .PcieMmio32WinSize     = 0x1000000,
     .PcieMmio64Translation = 0,
-    .PcieMmio64WinBase     = 0x8A0000000,
-    .PcieMmio64WinSize     = 0x10000000,
+    .PcieMmio64WinBase     = 0xA40000000,
+    .PcieMmio64WinSize     = 0x20000000,
   },
   { /* CP1 PCIE2 @0xF4640000 */
     .PcieDbiAddress        = 0xF4640000,
@@ -171,8 +171,8 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinBase     = 0xE7000000,
     .PcieMmio32WinSize     = 0x1000000,
     .PcieMmio64Translation = 0,
-    .PcieMmio64WinBase     = 0x8B0000000,
-    .PcieMmio64WinSize     = 0x10000000,
+    .PcieMmio64WinBase     = 0xA60000000,
+    .PcieMmio64WinSize     = 0x20000000,
   },
   { /* CP2 PCIE0 @0xF6600000 */
     .PcieDbiAddress        = 0xF6600000,
@@ -188,8 +188,8 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinBase     = 0xEA000000,
     .PcieMmio32WinSize     = 0x1000000,
     .PcieMmio64Translation = 0,
-    .PcieMmio64WinBase     = 0x8C0000000,
-    .PcieMmio64WinSize     = 0x10000000,
+    .PcieMmio64WinBase     = 0xA80000000,
+    .PcieMmio64WinSize     = 0x20000000,
   },
   { /* CP2 PCIE1 @0xF6620000 */
     .PcieDbiAddress        = 0xF6620000,
@@ -205,8 +205,8 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinBase     = 0xEC000000,
     .PcieMmio32WinSize     = 0x1000000,
     .PcieMmio64Translation = 0,
-    .PcieMmio64WinBase     = 0x8D0000000,
-    .PcieMmio64WinSize     = 0x10000000,
+    .PcieMmio64WinBase     = 0xAA0000000,
+    .PcieMmio64WinSize     = 0x20000000,
   },
   { /* CP2 PCIE2 @0xF6640000 */
     .PcieDbiAddress        = 0xF6640000,
@@ -222,8 +222,8 @@ MV_PCIE_CONTROLLER mPcieController[] = {
     .PcieMmio32WinBase     = 0xEE000000,
     .PcieMmio32WinSize     = 0x1000000,
     .PcieMmio64Translation = 0,
-    .PcieMmio64WinBase     = 0x8E0000000,
-    .PcieMmio64WinSize     = 0x10000000,
+    .PcieMmio64WinBase     = 0xAC0000000,
+    .PcieMmio64WinSize     = 0x20000000,
   },
 };
 
