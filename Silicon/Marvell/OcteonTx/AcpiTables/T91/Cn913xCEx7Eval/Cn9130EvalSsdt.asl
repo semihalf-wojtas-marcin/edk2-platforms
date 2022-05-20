@@ -146,6 +146,89 @@ DefinitionBlock ("Cn9130CEx7EvalSsdt.aml", "SSDT", 2, "MRVL", "CN913X", 3)
             {
                 Name (_ADR, 0x0)
             }
+            Device (SWI0)
+            {
+                Name (_HID, "MRVL0120")                         // _HID: Hardware ID
+                Name (_UID, 0x00)                               // _UID: Unique ID
+                Name (_ADR, 0x4)
+                Device (PRTS) {
+                    Name (_ADR, 0x0)
+                    Device (PRT1)
+                    {
+                        Name (_ADR, 0x1)
+                        Name (_DSD, Package () {
+                            ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
+                            Package () {
+                              Package () { "label", "lan2"},
+                              Package () { "phy-handle", \_SB.SMI0.SWI0.MDIO.S0P0},
+                            }
+                        })
+                    }
+                    Device (PRT2)
+                    {
+                        Name (_ADR, 0x2)
+                        Name (_DSD, Package () {
+                            ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
+                            Package () {
+                              Package () { "label", "lan1"},
+                              Package () { "phy-handle", \_SB.SMI0.SWI0.MDIO.S0P1},
+                            }
+                        })
+                    }
+                    Device (PRT3)
+                    {
+                        Name (_ADR, 0x3)
+                        Name (_DSD, Package () {
+                            ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
+                            Package () {
+                              Package () { "label", "lan4"},
+                              Package () { "phy-handle", \_SB.SMI0.SWI0.MDIO.S0P2},
+                            }
+                        })
+                    }
+                    Device (PRT4)
+                    {
+                        Name (_ADR, 0x4)
+                        Name (_DSD, Package () {
+                            ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
+                            Package () {
+                              Package () { "label", "lan3"},
+                              Package () { "phy-handle", \_SB.SMI0.SWI0.MDIO.S0P3},
+                            }
+                        })
+                    }
+                    Device (PRT5)
+                    {
+                        Name (_ADR, 0x5)
+                        Name (_DSD, Package () {
+                            ToUUID("daffd814-6eba-4d8c-8a91-bc9bbf4aa301"),
+                            Package () {
+                              Package () { "label", "cpu"},
+                              Package () { "ethernet", \_SB.PP20.ETH2},
+                            }
+                        })
+                    }
+                }
+                Device (MDIO) {
+                    Name (_ADR, 0x0)
+                    Device (S0P0)
+                    {
+                        Name (_ADR, 0x11)
+                    }
+                    Device (S0P1)
+                    {
+                        Name (_ADR, 0x12)
+                    }
+                    Device (S0P2)
+                    {
+                        Name (_ADR, 0x13)
+                    }
+                    Device (S0P3)
+                    {
+                        Name (_ADR, 0x14)
+                    }
+                }
+            }
         }
 
         Device (PP20)
